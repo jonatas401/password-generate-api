@@ -5,40 +5,39 @@ import java.net.URI;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.beehome.desafio.application.usercase.create.CreateService;
+import com.beehome.desafio.application.usercase.list.ListService;
 import com.beehome.desafio.domain.dto.FilterParams;
 import com.beehome.desafio.domain.dto.GeneratePasswordForm;
 import com.beehome.desafio.domain.dto.VaultDto;
-import com.beehome.desafio.interfaces.GenerateControllerInterface;
-import com.beehome.desafio.usercase.generate.GenerateServiceImpl;
+import com.beehome.desafio.interfaces.controllers.GenerateControllerInterface;
+import com.beehome.desafio.interfaces.services.CreateServiceInterface;
+import com.beehome.desafio.interfaces.services.ListServiceInterface;
 
 @RestController
-@RequestMapping("/api")
 public class GenerateControllerImpl implements GenerateControllerInterface{
 	
-	private GenerateServiceImpl generateServiceImpl;
+	private final CreateServiceInterface createService;
+	private final ListServiceInterface listService;
 
-	public GenerateControllerImpl(GenerateServiceImpl generateServiceImpl) {
-		this.generateServiceImpl = generateServiceImpl;
+	public GenerateControllerImpl(CreateService generateServiceImpl,
+			ListService generateListService) {
+		this.createService = generateServiceImpl;
+		this.listService = generateListService;
 	}
 
 	@Override
-	public PagedModel<VaultDto> getAll(Pageable page, FilterParams filters) {
-		return this.generateServiceImpl.getAll(page, filters);
+	public ResponseEntity<PagedModel<VaultDto>> getAll(Pageable page, FilterParams filters) {
+		return  ResponseEntity.ok(this.listService.execute(page, filters));
 	}
 
 	@Override
 	public ResponseEntity<String> create(GeneratePasswordForm form) {
-		String pass = this.generateServiceImpl.create(form);
-		URI uri = URI.create(String.format("https://localhost/api?nome=",pass));
+		String createdDate = this.createService.execute(form);
+		URI uri = URI.create(String.format("http://localhost:8080/api/password-history?createdDate=%s",createdDate));
 		return ResponseEntity.created(uri).build();
-	}
-
-	@Override
-	public void delete(long id) {
-		this.generateServiceImpl.delete(id);
 	}
 
 }

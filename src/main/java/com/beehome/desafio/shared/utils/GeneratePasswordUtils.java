@@ -20,14 +20,14 @@ public class GeneratePasswordUtils {
 		public static String generatePassword(GeneratePasswordForm generate) {
 			StringBuilder password = new StringBuilder(generate.size());
 			Random random = new SecureRandom();
-			List<String> charSelected = new ArrayList<>(4);
+			List<String> charSelected = new ArrayList<>();
 			if(generate.isLower())	charSelected.add(lowerCaseLetters);
 			if(generate.isUpper())	charSelected.add(upperCaseLetters);
 			if(generate.numbers()) charSelected.add(numbers);
 			if(generate.specialCharacter()) charSelected.add(caracters);
 			
 			for(int i = 0; i < generate.size();i++) {
-				  String charCategory = i >= 4 ? charSelected.get(random.nextInt(charSelected.size())) : charSelected.get(i);
+				  String charCategory = i >= charSelected.size() ? charSelected.get(random.nextInt(charSelected.size())) : charSelected.get(i);
 				  int position = random.nextInt(charCategory.length());
 				  password.append(charCategory.charAt(position));
 			}
