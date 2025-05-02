@@ -138,7 +138,54 @@ desafio/
 http://localhost:8080/swagger-ui/index.html
 
 
+## ✅ Modelo conceitual
+
+|Coluna | Tipo | Descrição|
+|***id*** | BIGINT | Identificador único do histórico|
+-----------------------------------------------------
+|***password** | TEXT | Hash da senha antiga|
+|***created_date** | datetime(6) | Data/hora da geração|
+
+| Coluna                     | Tipo                          | Descrição                |
+|----------------------------|---------------------------------------------|----------------------------------------------|
+| **id**                      | BIGINT  | 	Identificador único do histórico |
+| **password**              |   varchar(255)       |  senha |
+| **createdDate**           | datetime(6)               | Data/hora da geração |
 
 
 
+## 📄 Script SQL (para PostgreSQL)
 
+
+Na pasta docker existe um arquivo de docker-compose, dentro dela rode o comando:
+
+```
+docker compose up
+```
+
+Para entrar no banco pelo terminal:
+```
+mysql -h 127.0.0.1 -P 3306 -u root -p
+```
+- Entre com a senha "root"
+
+Criar banco de dados
+```
+CREATE DATABASE desafio;
+```
+
+Entre no banco de dados
+```
+use desafio;
+```
+
+Criar tabelas
+```
+CREATE TABLE vault (
+        id INT NOT NULL PRIMARY KEY,
+        password VARCHAR(256) NOT NULL,
+        createdDate datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+```
+
+## Aplicação pronta para dar start

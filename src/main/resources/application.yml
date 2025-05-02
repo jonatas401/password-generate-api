@@ -10,8 +10,8 @@ spring:
   datasource:
     url: ${DATABASE_URL:jdbc:mariadb://localhost:3306/desafio}
     driver-class-name: org.mariadb.jdbc.Driver
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:root}
   sql:
     init:
       platform: mariadb
