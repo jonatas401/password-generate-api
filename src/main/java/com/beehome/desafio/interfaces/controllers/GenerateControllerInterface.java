@@ -1,5 +1,6 @@
 package com.beehome.desafio.interfaces.controllers;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -27,11 +28,11 @@ public interface GenerateControllerInterface {
 
 	@GetMapping("/password-history")
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<PagedModel<VaultDto>>  getAll(@PageableDefault(sort = "createdDate",
-            direction = Sort.Direction.ASC,
+	public ResponseEntity<PagedModel<VaultDto>>  getAll(@ParameterObject @PageableDefault(sort = "createdDate",
+            direction = Sort.Direction.DESC,
             page = 0,
             size = 10) Pageable page,
-			@ModelAttribute FilterParams filters);
+			@ParameterObject FilterParams filters);
 	
 	@PostMapping("/generate-password")
 	@ResponseStatus(HttpStatus.CREATED)
