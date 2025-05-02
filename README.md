@@ -9,7 +9,7 @@ Com sua separação de responsabilidade é possível implementar novas funcional
 
 -  Nessa arquitetura também temos ganhos na testabilidade dos recursos, no qual pode ser testado cada caso de uso isoladamente, sem dependêcias externas.
 
-- Como nem tudo é flores, existe uma questão importante que deve ser levada em consideração nessa arquitetura, Ela é bem trabalhosa, estrutura mais elaborada, demanda tempo de organização e maior esforço incial em começos de projetos.
+- Como nem tudo é flores, existem algumas questões importantes que devem ser levadas em consideração nessa arquitetura, Ela é bem trabalhosa, estrutura mais elaborada, demanda tempo de organização e maior esforço incial em começos de projetos.
 
 
 🧩 Comparativo: Clean Architecture vs Arquitetura Tradicional
