@@ -38,7 +38,7 @@ public interface GenerateControllerInterface {
 	public ResponseEntity<String> create(@RequestBody @Valid GeneratePasswordForm form) ;
 	
 	@DeleteMapping("/delete-password/{id}")
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.ACCEPTED)
 	public ResponseEntity<String> delete(@PathVariable Long id) throws VaultNotFOundException ;
 	
 }
