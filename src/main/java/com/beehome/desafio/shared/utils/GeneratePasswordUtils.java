@@ -26,11 +26,15 @@ public class GeneratePasswordUtils {
 			if(generate.numbers()) charSelected.add(numbers);
 			if(generate.specialCharacter()) charSelected.add(caracters);
 			
+			if(!generate.isLower() && !generate.isUpper() && !generate.numbers() && !generate.specialCharacter()) {
+				charSelected.add(numbers);
+			}
 			for(int i = 0; i < generate.size();i++) {
-				  String charCategory = i >= charSelected.size() ? charSelected.get(random.nextInt(charSelected.size())) : charSelected.get(i);
+				  String charCategory =  charSelected.get(random.nextInt(charSelected.size())) ;
 				  int position = random.nextInt(charCategory.length());
 				  password.append(charCategory.charAt(position));
 			}
+			
 			return password.toString();
 		}
 		

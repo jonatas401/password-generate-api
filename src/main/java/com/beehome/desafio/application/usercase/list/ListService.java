@@ -1,5 +1,7 @@
 package com.beehome.desafio.application.usercase.list;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,6 +18,8 @@ import com.beehome.desafio.interfaces.services.ListServiceInterface;
 @Service
 public class ListService implements ListServiceInterface{
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ListService.class);
+	
 	private final GenerateRepository generateRepository;
 	
 	public ListService(GenerateRepository generateRepository) {
@@ -24,6 +28,7 @@ public class ListService implements ListServiceInterface{
 
 	@Override
 	public PagedModel<VaultDto> execute(Pageable page, FilterParams filters) {
+		LOGGER.info("Listing voults ...");
 		Specification<Vault> spec = GenerateSpecification.filter(filters);
 		Page<Vault> vault = this.generateRepository.findAll(spec,page);
 		return new PagedModel<VaultDto>(vault.map(VaultDto::new));

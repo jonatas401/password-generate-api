@@ -23,7 +23,7 @@ public class GenerateSpecification {
 			     	                "TO_CHAR", String.class, root.get("createdDate"), criteriaBuilder.literal("YYYY-MM-DD")
 			     	            );
 		
-			     	    Predicate hasDate = criteriaBuilder.like(dataFormatada, createdDate.toString() + "%");
+			     	    Predicate hasDate = criteriaBuilder.like(dataFormatada,String.format("%s%s%s","%",createdDate.toString(), "%" ) );
 			     	    specs.add(hasDate);
 	        		}
 	        	}

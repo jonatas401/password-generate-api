@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,7 +55,7 @@ class ListServiceInterfaceTest {
 		assertFalse(content.isEmpty());
         assertEquals(1, content.size());
         assertEquals("123123", content.get(0).password());
-        assertEquals(LocalDate.now(), content.get(0).createdDate());
+        assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), content.get(0).createdDate());
 		
 	}
 
