@@ -140,11 +140,6 @@ http://localhost:8080/swagger-ui/index.html
 
 ## ✅ Modelo conceitual
 
-|Coluna | Tipo | Descrição|
-|***id*** | BIGINT | Identificador único do histórico|
------------------------------------------------------
-|***password** | TEXT | Hash da senha antiga|
-|***created_date** | datetime(6) | Data/hora da geração|
 
 | Coluna                     | Tipo                          | Descrição                |
 |----------------------------|---------------------------------------------|----------------------------------------------|
