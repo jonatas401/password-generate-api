@@ -1,5 +1,6 @@
 package com.beehome.desafio.interfaces.controllers;
 
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
@@ -22,12 +23,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.beehome.desafio.application.usercase.create.CreateService;
+import com.beehome.desafio.application.usercase.delete.DeleteService;
 import com.beehome.desafio.application.usercase.list.ListService;
 import com.beehome.desafio.domain.dto.FilterParams;
 import com.beehome.desafio.domain.dto.GeneratePasswordForm;
 import com.beehome.desafio.domain.dto.VaultDto;
 import com.beehome.desafio.domain.repositories.GenerateRepository;
 import com.beehome.desafio.interfaces.services.CreateServiceInterface;
+import com.beehome.desafio.interfaces.services.DeleteServiceInterface;
 import com.beehome.desafio.interfaces.services.ListServiceInterface;
 import com.beehome.desafio.presentation.GenerateControllerImpl;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -46,6 +49,9 @@ class GenerateControllerInterfaceTest {
 	
 	@MockitoBean
 	private ListService listService;
+	
+	@MockitoBean
+	private DeleteService deleteService;
 	
 	@Autowired
     private MockMvc mockMvc;
@@ -87,18 +93,32 @@ class GenerateControllerInterfaceTest {
 	@Test
 	@DisplayName("should return vauls list")
 	void shouldListVaultsList() throws Exception {
-		ListServiceInterface createServiceInterface = this.listService;
+		ListServiceInterface listServiceInterface = this.listService;
 		PagedModel<VaultDto> vaultDto = Mockito.mock();
 		Pageable pageable = Mockito.mock(Pageable.class);
 		FilterParams filterParams = new FilterParams(LocalDate.now());
 		
-        BDDMockito.when(createServiceInterface.execute(pageable, filterParams))
+        BDDMockito.when(listServiceInterface.execute(pageable, filterParams))
         .thenReturn(vaultDto);
         
         this.mockMvc.perform(MockMvcRequestBuilders
                         .get("/api/password-history")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+	}
+	
+	@Test
+	@DisplayName("should delete password")
+	void shouldDeletePassword() throws Exception {
+		DeleteServiceInterface deleteServiceInterface = this.deleteService;
+		Long id = Long.valueOf(0);
+		
+        doNothing().when(deleteServiceInterface).execute(id);
+        
+        this.mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/api/delete-password/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted());
 	}
 
 }
