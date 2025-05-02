@@ -13,7 +13,7 @@ import com.beehome.desafio.application.usercase.list.ListService;
 import com.beehome.desafio.domain.dto.FilterParams;
 import com.beehome.desafio.domain.dto.GeneratePasswordForm;
 import com.beehome.desafio.domain.dto.VaultDto;
-import com.beehome.desafio.domain.exceptions.VaultNotFOundException;
+import com.beehome.desafio.domain.exceptions.VaultNotFoundException;
 import com.beehome.desafio.interfaces.controllers.GenerateControllerInterface;
 import com.beehome.desafio.interfaces.services.CreateServiceInterface;
 import com.beehome.desafio.interfaces.services.DeleteServiceInterface;
@@ -46,7 +46,7 @@ public class GenerateControllerImpl implements GenerateControllerInterface{
 	}
 
 	@Override
-	public ResponseEntity<String> delete(Long id) throws VaultNotFOundException {
+	public ResponseEntity<String> delete(Long id) throws VaultNotFoundException {
 		deleteService.execute(id);
 		return ResponseEntity.accepted().build();
 	}

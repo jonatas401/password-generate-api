@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.beehome.desafio.domain.entities.Vault;
-import com.beehome.desafio.domain.exceptions.VaultNotFOundException;
+import com.beehome.desafio.domain.exceptions.VaultNotFoundException;
 import com.beehome.desafio.domain.repositories.GenerateRepository;
 import com.beehome.desafio.interfaces.services.DeleteServiceInterface;
 
@@ -24,9 +24,9 @@ public class DeleteService implements DeleteServiceInterface{
 
 	@Override
 	@Transactional
-	public void execute(Long id) throws VaultNotFOundException {
+	public void execute(Long id) throws VaultNotFoundException {
 		LOGGER.info("Deleting password");
-		Vault vault = generateRepository.findById(id).orElseThrow(()-> new VaultNotFOundException(id));
+		Vault vault = generateRepository.findById(id).orElseThrow(()-> new VaultNotFoundException(id));
 		this.generateRepository.delete(vault);
 	}
 

@@ -1,8 +1,8 @@
 package com.beehome.desafio.interfaces.services;
 
-import com.beehome.desafio.domain.exceptions.VaultNotFOundException;
+import com.beehome.desafio.domain.exceptions.VaultNotFoundException;
 
 public interface DeleteServiceInterface {
 
-	public void execute(Long id) throws VaultNotFOundException;
+	public void execute(Long id) throws VaultNotFoundException;
 }

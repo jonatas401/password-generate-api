@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.beehome.desafio.domain.dto.FilterParams;
 import com.beehome.desafio.domain.dto.GeneratePasswordForm;
 import com.beehome.desafio.domain.dto.VaultDto;
-import com.beehome.desafio.domain.exceptions.VaultNotFOundException;
+import com.beehome.desafio.domain.exceptions.VaultNotFoundException;
 
 import jakarta.validation.Valid;
 
@@ -39,6 +39,6 @@ public interface GenerateControllerInterface {
 	
 	@DeleteMapping("/delete-password/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public ResponseEntity<String> delete(@PathVariable Long id) throws VaultNotFOundException ;
+	public ResponseEntity<String> delete(@PathVariable Long id) throws VaultNotFoundException ;
 	
 }

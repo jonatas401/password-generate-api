@@ -1,11 +1,11 @@
 package com.beehome.desafio.domain.exceptions;
 
 
-public class VaultNotFOundException extends Exception{
+public class VaultNotFoundException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 
-	public VaultNotFOundException(Long id) {
+	public VaultNotFoundException(Long id) {
 		super(String.format("Password com id %s não encontrado", id));
 	}
 }
